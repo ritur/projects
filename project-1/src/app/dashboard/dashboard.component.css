@@ -1,0 +1,30 @@
+.common_orng_title {
+    text-align: left;
+    color: #faa201;
+    padding-bottom: 20px;
+  }
+  .left_sect_dash
+  {
+      background: #ffffff;
+  }
+  .left_sect_dash h3
+  {
+      color: #33495d;    
+      padding-top: 20px;
+      padding-bottom: 20px;
+      padding-left: 10px;
+      padding-right: 10px;
+  }
+  .offer_sec {
+      color: #33495d;
+      text-align: center;
+      background: #ffffff;
+      padding: 25px 25px;
+  }
+  .common_orng_title span {
+      border-bottom: 2px solid #faa201;
+  
+  }
+  .paddingright50 span {
+      padding-right: 50px;
+  }

@@ -1,0 +1,43 @@
+.cstm_h1_cat{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+}  
+.cstm_p_cat{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    padding-bottom: 35px;
+    }
+    .cst_ok_btn{
+    float: right;
+    background: #223241!important;
+    color: #fff!important;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    }
+    
+    .cst_cancel_btn{
+    float: left;
+    background: #223241!important;
+    color: #fff!important;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    }
+    
+    .cst_ok_btn:hover,.cst_ok_btn:focus{
+    background: #395065!important;
+    color: #fff!important;
+    }
+    
+    .cst_cancel_btn:hover,.cst_cancel_btn:focus{
+    background: #395065!important;
+    color: #fff!important;
+    }
+    .errormessageserver{
+        color: #ff0000;
+        margin-left: 16px;
+      }
+      .errormesg{
+        clear: both;
+        padding-top: 13px;
+      }

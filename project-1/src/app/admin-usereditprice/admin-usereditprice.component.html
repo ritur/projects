@@ -1,0 +1,141 @@
+<!-- Four Unequal Columns -->
+<app-admin-header></app-admin-header>
+<div class="seperater"></div>
+<form [formGroup]="editprofile" (ngSubmit)="onFormSubmit(editprofile.value)">
+  <div class="container-fluid">
+    <div class="row" id="first_row">
+
+      <div class="col-md-12">
+        <div class="form_title">
+          <h2>User profile</h2>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-md-6">
+            <!-- <input type="text" class="form-control"  value="{{firstName}}"  placeholder="First name"> -->
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>First Name</mat-label>
+              <input formControlName="firstName" type="text" matInput placeholder="First name" style="text-transform: capitalize;" value="{{firstName}}"
+                (keyup)="valuefirst()" [ngClass]="{ 'is-invalid': error_firstname }" />
+              <!-- <mat-form-field class="example-full-width">
+                <input formControlName="password" type="password"  matInput placeholder="User password" value="{{password}}">
+              </mat-form-field> -->
+
+            </mat-form-field>
+            <div *ngIf="submitForm && f.firstName.errors" class="errormessageserver">
+              <div *ngIf="f.firstName.errors.required">First name required</div>
+
+
+            </div>
+            <div *ngIf="error_firstname" class="errormessageserver">
+              <div *ngIf="error_firstname">First name invalid</div>
+            </div>
+          </div>
+
+
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="example-full-width">
+              <!-- <input type="text" class="form-control" value="{{lastName}}" id="lastName" style="text-transform: capitalize;"
+                            placeholder="Last name"> -->
+              <mat-label>Last Name</mat-label>
+              <input formControlName="lastName" type="text" (keyup)="valuelast()" matInput style="text-transform: capitalize;" [ngClass]="{ 'is-invalid':  error_lastname}"
+                placeholder="Last name" value="{{lastName}}" />
+            </mat-form-field>
+            <div *ngIf="submitForm && f.lastName.errors" class="errormessageserver">
+              <div *ngIf="f.lastName.errors.required">Last name required</div>
+
+
+            </div>
+            <div *ngIf="error_lastname" class="errormessageserver">
+              <div *ngIf="error_lastname">Last name invalid</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-6">
+            <!-- <input type="email" class="form-control"  value="{{emailId}}"  placeholder="Email"> -->
+            <mat-form-field appearance="outline" class="example-full-width">
+
+              <mat-label>Email Id</mat-label>
+              <input formControlName="emailId" type="text" matInput placeholder="Email" value="{{emailId}}" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <!-- <input type="text" class="form-control" value="{{address}}" placeholder="Addrress"> -->
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>Mobile No</mat-label>
+              <input formControlName="mobileNo" type="number" matInput placeholder="Mobile number" value="{{mobileNo}}" />
+            </mat-form-field>
+          </div>
+
+        </div>
+
+        <div class="form-group row">
+          <div class="col-md-6">
+
+            <!-- <input type="text" class="form-control"  value="{{street}}"  placeholder="Street"> -->
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>Street</mat-label>
+              <input formControlName="street" type="text" matInput placeholder="Street" value="{{street}}" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <!-- <input type="text" class="form-control" value="{{address}}" placeholder="Addrress"> -->
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>Address</mat-label>
+              <input formControlName="address" type="text" matInput placeholder="Address" value="{{address}}" />
+            </mat-form-field>
+          </div>
+
+        </div>
+
+        <div class="form-group row">
+          <div class="col-md-6">
+
+            <!-- <input type="text" class="form-control" value="{{creditprice}}" placeholder="Credit Price"> -->
+
+            <mat-form-field class="example-full-width">
+              <input formControlName="creditprice" type="number" min="0.5" matInput placeholder="Credit Price per each" value="{{creditprice}}">
+
+
+
+            </mat-form-field>
+            <div *ngIf=" f.creditprice.errors" class="error_msg">
+
+              <div *ngIf="f.creditprice.errors.min">Credit price must be greater then or equal to 0.5</div>
+
+            </div>
+          </div>
+          <div class="col-md-6">
+            <!-- <input type="text" class="form-control" placeholder="Add Credit"> -->
+            <mat-form-field class="example-full-width">
+              <input formControlName="purchasecredit" type="number" min="1" matInput placeholder="Add Credit">
+            </mat-form-field>
+          </div>
+
+        </div>
+        <div class="form-group row">
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+              <input formControlName="allowed_login" type="number" min="1" matInput placeholder="Allowed Number of login" value="{{allowed_no_of_login}}">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+              <input formControlName="password" type="password" matInput placeholder="User password" value="{{password}}">
+            </mat-form-field>
+          </div>
+        </div>
+
+
+
+        <button type="button" type="submit" class="btn btn-primary btn_cstm_cmmn px-4 text-center">Save</button>
+        <img *ngIf="loader" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+        />
+        <span style="color:#10d110" *ngIf="message">{{message}}</span>
+
+      </div>
+
+    </div>
+  </div>
+</form>

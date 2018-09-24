@@ -1,0 +1,38 @@
+<div class="bg"></div>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+    <p>Please Sign in</p>
+    <div class="form-group ">
+        <label for="emailId">Email address</label>
+        <!-- <mat-form-field class="example-full-width">
+            <input matInput placeholder="Email Address"  formControlName="emailId" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.emailId.errors }" >
+        </mat-form-field> -->
+        <input type="email" name="email" (keyup)="validemail()" formControlName="emailId" placeholder="email" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.emailId.errors }" />
+        <div *ngIf="submitted && f.emailId.errors" class="invalid-feedback">
+            <div *ngIf="f.emailId.errors.required">Email is required</div>
+        </div>
+        <div *ngIf="!emailvalid" class="invalid-feedback">
+            <div *ngIf="!emailvalid">Email is invalid</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" placeholder="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+        />
+        <div *ngIf="incorrect" style="color:red">{{message_incorrect}}</div>
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+
+        </div>
+    </div>
+    <div class="form-group">
+        <mat-checkbox formControlName="remember">Remember me</mat-checkbox>
+        <label class="label-trouble" style="cursor: pointer;pointer-events: initial;" href="/forgotPassword" on-click="redirectforgot($event)">Forgot Password?</label>
+    </div>
+    <div class="form-group">
+        <button type=submit [disabled]="loading" class="btn btnlogin">Sign in</button>
+        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+        />
+
+    </div>
+</form>

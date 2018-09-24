@@ -1,0 +1,378 @@
+<app-admin-header></app-admin-header>
+<mat-spinner *ngIf="loading" class="example-form"></mat-spinner>
+<form *ngIf="!loading" class="example-form" [formGroup]="assetbundleform" (ngSubmit)="onSubmit(assetbundleform.value,$event)">
+  <!-- <mat-spinner></mat-spinner> -->
+  <div class="form_title">
+    <h2>Assets Bundle</h2>
+  </div>
+  <div class="row ">
+    <div class="col-sm-5 offset-1 form-group">
+      <mat-form-field class="example-full-width asset_custom_gap">
+        <input formControlName="assetName" matInput placeholder="Name" value="">
+      </mat-form-field>
+      <div *ngIf="submitted && f.assetName.errors" style="color:red">
+
+        <div *ngIf="f.assetName.errors.required">AssetBundle name is required</div>
+
+      </div>
+    </div>
+
+    <div class="col-sm-5 form-group">
+
+      <ng-select [items]="options" placeholder="Select Users" [multiple]="true" [closeOnSelect]="false" bindLabel="name" formControlName="myControl">
+      </ng-select>
+      <div *ngIf="submitted && f.myControl.errors" style="color:red">
+
+        <div *ngIf="f.myControl.errors.required">User permission is required</div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="customseperator"></div>
+
+  <div class="row">
+    <div class="col-sm-5 offset-1">
+      <label for="">
+        <strong>Thumbnail</strong>
+      </label>
+      <br />
+      <label class="btn thumb" (click)="thumbnail.click()">Browse</label>
+
+      <label *ngIf="thumbnailfile" class="uploadfilename">{{thumbnailfile.name}}</label>
+      <input formControlName="thumbnail" accept="image/*" type="file" style="display: none;" name="thumbnail" #thumbnail (change)="onFileChange1($event)"
+      />
+
+      <input type="hidden" name="fileHidden" formControlName="thumbnailinput" />
+
+      <div *ngIf="submitted && f.thumbnailinput.errors" style="color:red">
+
+        <div *ngIf="f.thumbnailinput.errors.required">Thumbnail required</div>
+
+      </div>
+
+    </div>
+    <div class="col-sm-5 ">
+
+      <img style="width: 50px;height: 50px;border-radius: 25px" name="imagethumbdisplay" class="imagethumbdisplayclass" src="{{url}}"
+        alternative="no image" />
+
+    </div>
+  </div>
+  <div class="customseperator"></div>
+
+  <div class="row">
+    <div class="col-sm-5 offset-1">
+      <label for="">
+        <strong>Window Assetsbundle</strong>
+      </label>
+      <br />
+      <label class="btn thumb" (click)="uploadforwindow.click()">Browse</label>
+
+      <!-- <angular-file-uploader #fileUpload1 name="windowassest" [config]="assetconfig" (ApiResponse)="DocUpload($event,'windowinput')">
+
+      </angular-file-uploader> -->
+      <input type="file" style="display: none;" ng2FileSelect [uploader]="uploaderwind" #uploadforwindow/>
+      <label class="uploadfilename">{{uploaderwind.queue[uploaderwind.queue.length-1]?.file?.name}}</label>
+      <div *ngIf="uploaderwind.progress!==0">
+        <label class="labelbuild1">Window Build Upload </label>
+        <label class="labelbuild2  cstm_percent"> {{uploaderwind.progress + '%'}}</label>
+        <label *ngIf="showwinsuccess" class="labelbuild2 completeupload">Successfully Uploaded!</label>
+      </div>
+      <div class="progress">
+
+        <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{ 'width': uploaderwind.progress + '%' }"></div>
+      </div>
+      <input type="hidden" name="fileHidden" formControlName="windowinput" />
+      <div *ngIf="submitted && f.windowinput.errors" style="color:red">
+
+        <div *ngIf="f.windowinput.errors.required">Window Asset required</div>
+
+      </div>
+
+    </div>
+
+    <div class="col-sm-5">
+      <label for="">
+        <strong>MAC Assetsbundle</strong>
+      </label>
+      <br />
+
+      <label class="btn thumb" (click)="uploadformac.click()">Browse</label>
+
+      <!-- <angular-file-uploader #fileUpload2 name="macasset" [config]="assetconfig" (ApiResponse)="DocUpload($event,'macinput')">
+
+      </angular-file-uploader> -->
+      <input type="file" style="display: none;" ng2FileSelect [uploader]="uploadermac" #uploadformac/>
+      <!-- <div *ngFor="let item of uploadermac.queue">
+          <label>{{item?.file?.name}}</label>
+          </div> -->
+
+      <label class="uploadfilename">{{uploadermac.queue[uploadermac.queue.length-1]?.file?.name}}</label>
+      <div *ngIf="uploadermac.progress!==0">
+        <label class="labelbuild1">MAC Build Upload </label>
+        <label class="labelbuild2  cstm_percent"> {{uploadermac.progress + '%'}}</label>
+        <label *ngIf="showmacsuccess" class="labelbuild2 completeupload">Successfully Uploaded!</label>
+      </div>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{ 'width': uploadermac.progress + '%' }"></div>
+      </div>
+      <input type="hidden" name="fileHidden" formControlName="macinput" />
+      <div *ngIf="submitted && f.macinput.errors" style="color:red">
+
+        <div *ngIf="f.macinput.errors.required">MAC Asset required</div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="customseperator"></div>
+
+  <div class="row">
+    <div class="col-sm-5 offset-1">
+      <label for="">
+        <strong>IOS Assetsbundle</strong>
+      </label>
+      <br />
+      <label class="btn thumb" (click)="uploadforios.click()">Browse</label>
+      <!-- <input type="file" formControlName="iosasset"> -->
+      <!-- <angular-file-uploader #fileUpload3 name="iosasset" [config]="assetconfig" (ApiResponse)="DocUpload($event,'iosinput')">
+
+      </angular-file-uploader> -->
+      <input type="file" style="display: none;" ng2FileSelect [uploader]="uploaderios" #uploadforios/>
+      <!-- <div *ngFor="let item of uploaderios.queue"></div> -->
+
+      <label class="uploadfilename">{{uploaderios.queue[uploaderios.queue.length-1]?.file?.name}}</label>
+      <div *ngIf="uploaderios.progress!==0">
+        <label class="labelbuild1">IOS Build Upload </label>
+        <label class="labelbuild2  cstm_percent"> {{uploaderios.progress + '%'}}</label>
+        <label *ngIf="showiossuccess" class="labelbuild2 completeupload">Successfully Uploaded!</label>
+      </div>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{ 'width': uploaderios.progress + '%' }"></div>
+      </div>
+      <input type="hidden" name="fileHidden" formControlName="iosinput" />
+
+
+    </div>
+
+    <div class="col-sm-5">
+      <label for="">
+        <strong>Android Assetsbundle</strong>
+      </label>
+      <br />
+      <label class="btn thumb" (click)="uploadforandroid.click()">Browse</label>
+      <!-- <angular-file-uploader #fileUpload4 name="androidasset" [config]="assetconfig" (ApiResponse)="DocUpload($event,'androidinput')">
+      </angular-file-uploader> -->
+      <input type="file" style="display: none;" ng2FileSelect [uploader]="uploaderand" #uploadforandroid/>
+
+      <label class="uploadfilename">{{uploaderand.queue[uploaderand.queue.length-1]?.file?.name}}</label>
+      <div *ngIf="uploaderand.progress!==0">
+        <label class="labelbuild1">Android Build Upload </label>
+        <label class="labelbuild2  cstm_percent"> {{uploaderand.progress + '%'}}</label>
+        <label *ngIf="showandsuccess" class="labelbuild2 completeupload">Successfully Uploaded!</label>
+      </div>
+
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{ 'width': uploaderand.progress + '%' }"></div>
+      </div>
+      <input type="hidden" name="fileHidden" formControlName="androidinput" />
+
+
+    </div>
+  </div>
+  <div class="customseperator"></div>
+
+
+  <div class="row">
+    <div class="col-sm-5 offset-1">
+      <label for="">
+        <strong>Webgl Assetsbundle</strong>
+      </label>
+      <br />
+      <label class="btn thumb" (click)="webglfile.click()">Browse</label>
+      <!-- <input type="file" formControlName="iosasset"> -->
+      <!-- <angular-file-uploader #fileUpload3 name="iosasset" [config]="assetconfig" (ApiResponse)="DocUpload($event,'iosinput')">
+
+      </angular-file-uploader> -->
+      <input type="file" style="display: none;" ng2FileSelect [uploader]="uploaderweb" #webglfile/>
+      <!-- <div *ngFor="let item of uploaderios.queue"></div> -->
+
+      <label class="uploadfilename">{{uploaderweb.queue[uploaderweb.queue.length-1]?.file?.name}}</label>
+      <div *ngIf="uploaderweb.progress!==0">
+        <label class="labelbuild1">Webgl Build Upload </label>
+        <label class="labelbuild2  cstm_percent"> {{uploaderweb.progress + '%'}}</label>
+        <label *ngIf="showwebsuccess" class="labelbuild2 completeupload">Successfully Uploaded!</label>
+      </div>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{ 'width': uploaderweb.progress + '%' }"></div>
+      </div>
+      <input type="hidden" name="fileHidden" formControlName="webinput" />
+    </div>
+  </div>
+
+  <div class="customseperator"></div>
+
+  <div class="row">
+    <div class="col-sm-5 offset-1">
+      <mat-form-field class="example-full-width">
+        <mat-select formControlName="categories" placeholder="Select Category"  multiple>
+          <mat-option *ngFor="let topping of toppingList" [value]="topping._id">{{topping.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="col-sm-5">
+      <mat-form-field class="example-full-width">
+        <input formControlName="version" type="number" min="1" matInput placeholder="Version" value="">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="customseperator"></div>
+
+  <div class="row">
+    <div class="col-sm-5 offset-1">
+      <mat-form-field class="example-full-width">
+        <mat-select formControlName="searchtages" placeholder="Select Search Tag"  multiple>
+          <mat-option *ngFor="let searchtagtopping of searchtagtoppingList" [value]="searchtagtopping._id">{{searchtagtopping.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="customseperator"></div>
+
+  <div class="row">
+    <div *ngIf="!showpredefined" class="col-sm-5 offset-1">
+      <button type="button" (click)="changepredefined()" class="btn custom_predefined">Add Predfined</button>
+      <button mat-raised-button color="accent" class="btn_cstm_cmmn buttongapcust ">SUBMIT</button>
+      <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+      />
+    </div>
+  </div>
+  <div *ngIf="showpredefined">
+    <div formArrayName="itemRows">
+      <div *ngFor="let itemrow of itemRows.controls; let i=index" [formGroupName]="i">
+        <div class="row ">
+          <div class="col-sm-5 offset-1">
+
+            <label style="font-size: 20px;font-weight: 800"> Predfined Angles {{i+1}}</label>
+
+
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-10 offset-1 align_right">
+            <button type="button" (click)="deleteRow(i)" class="btn custom_predefined">Delete Predfined</button>
+          </div>
+        </div>
+        <div class="customseperator"></div>
+        <div class="row ">
+          <div class="col-sm-5 offset-1 form-group">
+            <mat-form-field class="example-full-width">
+              <input formControlName="angleName" matInput placeholder="Angle Name" value="">
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-5 form-group">
+            <mat-form-field class="example-full-width">
+              <input formControlName="angleversion" type="number" min="1" matInput placeholder="Angle Version" value="">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="customseperator"></div>
+        <div class="row ">
+          <div class="col-sm-5 offset-1 form-group">
+            <mat-form-field class="example-full-width">
+              <input formControlName="xRotation" type="number" min="0" matInput placeholder="xRotation" value="">
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-5 form-group">
+            <mat-form-field class="example-full-width">
+              <input formControlName="yRotation" type="number" min="0" matInput placeholder="yRotation" value="">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="customseperator"></div>
+        <div class="row ">
+          <div class="col-sm-5 offset-1 form-group">
+            <mat-form-field class="example-full-width">
+              <input formControlName="zRotation" type="number" min="0" matInput placeholder="zRotation" value="">
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-5 form-group">
+            <mat-form-field class="example-full-width">
+              <input formControlName="xPosition" type="number" min="0" matInput placeholder="xPosition" value="">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="customseperator"></div>
+        <div class="row ">
+          <div class="col-sm-5 offset-1 form-group">
+            <mat-form-field class="example-full-width">
+              <input formControlName="yPosition" type="number" min="0" matInput placeholder="yPosition" value="">
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-5 form-group">
+            <mat-form-field class="example-full-width">
+              <input formControlName="zPosition" type="number" min="0" matInput placeholder="zPosition" value="">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="customseperator"></div>
+        <div class="row ">
+          <div class="col-sm-5 offset-1 form-group">
+            <mat-form-field class="example-full-width">
+              <input formControlName="field_view" type="number" min="0" matInput placeholder="Field Of View" value="">
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-5 form-group">
+
+            <mat-form-field class="example-full-width">
+              <mat-select placeholder="Freeze Rotation" formControlName="freeze_rotation">
+                <mat-option *ngFor="let freeze of freeze_rotas" [value]="freeze.value">
+                  {{freeze.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="customseperator"></div>
+        <div class="row ">
+          <div class="col-sm-10 offset-1 form-group">
+            <mat-form-field class="example-full-width">
+              <input formControlName="distance" type="number" min="0" matInput placeholder="Distance" value="">
+            </mat-form-field>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-5 offset-1">
+        <button type="button" (click)="addNewRow()" class="btn custom_predefined">Add Predfined</button>
+        <button mat-raised-button color="accent" class="btn_cstm_cmmn buttongapcust">SUBMIT</button>
+        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+        />
+      </div>
+    </div>
+    <div class="customseperator"></div>
+  </div>
+  <div class="customseperator"></div>
+  <div class="row">
+    <div class="col-sm-10 offset-1">
+      <!-- <label class="btn thumb" (click)="changefile2($event)">Upload All files</label> -->
+
+      <!-- <button mat-raised-button color="accent">Clear</button> -->
+    </div>
+  </div>
+
+</form>

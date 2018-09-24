@@ -1,0 +1,374 @@
+<app-admin-header></app-admin-header>
+<form class="example-form" [formGroup]="assetbundleform" (ngSubmit)="onSubmit(assetbundleform.value)">
+
+  <div class="row ">
+    <div class="col-sm-5 offset-1 ">
+      <mat-form-field class="example-full-width asset_custom_gap">
+        <input formControlName="assetName" matInput placeholder="Name" value="{{assetName}}">
+
+      </mat-form-field>
+      <div *ngIf="submitted && f.assetName.errors" style="color:red">
+
+        <div *ngIf="f.assetName.errors.required">AssetBundle name is required</div>
+
+      </div>
+    </div>
+
+    <div class="col-sm-5 ">
+      <ng-select [items]="options" placeholder="Select Users" [multiple]="true" [closeOnSelect]="false" bindLabel="name" formControlName="myControl">
+      </ng-select>
+
+      <div *ngIf="submitted && f.myControl.errors" style="color:red">
+
+        <div *ngIf="f.myControl.errors.required">User permission is required</div>
+
+      </div>
+
+    </div>
+
+  </div>
+  <div class="customseperator"></div>
+
+  <div class="row">
+    <div class="col-sm-5 offset-1">
+      <label for="">
+        <strong>Thumbnail</strong>
+      </label>
+      <br />
+      <label class="btn thumb" (click)="thumbnail.click()">Browse</label>
+
+      <label *ngIf="thumbnailfile" class="uploadfilename">{{thumbnailfile.name}}</label>
+      <input formControlName="thumbnail" accept="image/*" type="file" style="display: none;" name="thumbnail" #thumbnail (change)="onFileChange1($event)"
+      />
+
+      <input type="hidden" name="fileHidden" formControlName="thumbnailinput" />
+
+      <div *ngIf="submitted && f.thumbnailinput.errors" style="color:red">
+
+        <div *ngIf="f.thumbnailinput.errors.required">Thumbnail required</div>
+
+      </div>
+
+    </div>
+    <div class="col-sm-5 ">
+        
+      <img style="width: 50px;height: 50px;border-radius: 25px" name="imagethumbdisplay" class="imagethumbdisplayclass" src="{{url}}" alternative="no image" /> 
+
+    </div>
+  </div>
+
+  <div class="customseperator"></div>
+
+  <div class="row">
+    <div class="col-sm-5 offset-1 ">
+      <label for="">
+        <strong>Window Assetsbundle</strong>
+      </label>
+      <br />
+      <!-- <div *ngIf="f.windowinput.value"> -->
+      <div *ngIf="f.windowinput.value" style="font-size: 1rem;padding-bottom: 10px">{{f.windowinput.value}}</div>
+
+      <!-- </div> -->
+      <label class="btn thumb" (click)="editwindowfile.click()">Browse</label>
+      <input type="file" style="display: none;" ng2FileSelect [uploader]="uploaderwind" #editwindowfile/>
+      <!-- <div *ngFor="let item of uploaderwind.queue">
+        <label>{{item?.file?.name}}</label>
+      </div> -->
+      <label class="uploadfilename">{{uploaderwind.queue[uploaderwind.queue.length-1]?.file?.name}}</label>
+      <div *ngIf="uploaderwind.progress!==0">
+        <label class="labelbuild1">Window Build Upload </label>
+        <label class="labelbuild2 uploadfileprecentage"> {{uploaderwind.progress + '%'}}</label>
+        <label *ngIf="showwinsuccess" class="labelbuild2 completeupload">Successfully Uploaded!</label>
+      </div>
+      <div class="progress">
+
+        <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{ 'width': uploaderwind.progress + '%' }"></div>
+      </div>
+      <input type="hidden" name="fileHidden" formControlName="windowinput" />
+      <div *ngIf="submitted && f.windowinput.errors" style="color:red">
+
+        <div *ngIf="f.windowinput.errors.required">Window Asset required</div>
+
+      </div>
+    </div>
+
+    <div class="col-sm-5 ">
+      <label for="">
+        <strong>MAC Assetsbundle</strong>
+      </label>
+      <br />
+      <!-- <div *ngIf="f.macinput.value"> -->
+      <div *ngIf="f.macinput.value" style="font-size: 1rem;padding-bottom: 10px">{{f.macinput.value}}</div>
+
+      <!-- </div> -->
+      <label class="btn thumb" (click)="editmacfile.click()">Browse</label>
+      <input type="file" style="display: none;" ng2FileSelect [uploader]="uploadermac" #editmacfile/>
+      <!-- <div *ngFor="let item of uploadermac.queue">
+        <label>{{item?.file?.name}}</label>
+      </div> -->
+
+      <label class="uploadfilename">{{uploadermac.queue[uploadermac.queue.length-1]?.file?.name}}</label>
+      <div *ngIf="uploadermac.progress!==0">
+        <label class="labelbuild1">MAC Build Upload </label>
+        <label class="labelbuild2 uploadfileprecentage"> {{uploadermac.progress + '%'}}</label>
+        <label *ngIf="showmacsuccess" class="labelbuild2 completeupload">Successfully Uploaded!</label>
+      </div>
+      <div class="progress">
+        <div class="progress-bar  progress-bar-striped" role="progressbar" [ngStyle]="{ 'width': uploadermac.progress + '%' }"></div>
+      </div>
+      <input type="hidden" name="fileHidden" formControlName="macinput" />
+      <div *ngIf="submitted && f.macinput.errors" style="color:red">
+      </div>
+    </div>
+  </div>
+
+  <div class="customseperator"></div>
+
+  <div class="row">
+    <div class="col-sm-5 offset-1 ">
+      <label for="">
+        <strong>IOS Assetsbundle</strong>
+      </label>
+      <br />
+      <!-- <div *ngIf="f.iosinput.value"> -->
+      <div *ngIf="f.iosinput.value" style="font-size: 1rem;padding-bottom: 10px">{{f.iosinput.value}}</div>
+
+      <!-- </div> -->
+
+      <label class="btn thumb" (click)="editiosfile.click()">Browse</label>
+      <input type="file" style="display: none;" ng2FileSelect [uploader]="uploaderios" #editiosfile />
+      <!-- <div *ngFor="let item of uploaderios.queue">
+        <label>{{item?.file?.name}}</label>
+      </div> -->
+      <label class="uploadfilename">{{uploaderios.queue[uploaderios.queue.length-1]?.file?.name}}</label>
+      <div *ngIf="uploaderios.progress!==0">
+        <label class="labelbuild1">IOS Build Upload </label>
+        <label class="labelbuild2 uploadfileprecentage"> {{uploaderios.progress + '%'}}</label>
+        <label *ngIf="showiossuccess" class="labelbuild2 completeupload">Successfully Uploaded!</label>
+      </div>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{ 'width': uploaderios.progress + '%' }"></div>
+      </div>
+      <input type="hidden" name="fileHidden" formControlName="iosinput" />
+
+
+      <!-- Validation Field -->
+
+    </div>
+
+    <div class="col-sm-5  ">
+      <label for="">
+        <strong>Android Assetsbundle</strong>
+      </label>
+      <br />
+      <!-- <div *ngIf="f.androidinput.value"> -->
+      <div *ngIf="f.androidinput.value" style="font-size: 1rem;padding-bottom: 10px">{{f.androidinput.value}}</div>
+
+      <!-- </div> -->
+      <label class="btn thumb" (click)="editandroidfile.click()">Browse</label>
+      <input type="file" style="display: none;" ng2FileSelect [uploader]="uploaderand" #editandroidfile/>
+      <label class="uploadfilename">{{uploaderand.queue[uploaderand.queue.length-1]?.file?.name}}</label>
+      <div *ngIf="uploaderand.progress!==0">
+        <label class="labelbuild1">Android Build Upload </label>
+        <label class="labelbuild2 uploadfileprecentage"> {{uploaderand.progress + '%'}}</label>
+        <label *ngIf="showandsuccess" class="labelbuild2 completeupload">Successfully Uploaded!</label>
+      </div>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{ 'width': uploaderand.progress + '%' }"></div>
+      </div>
+      <input type="hidden" name="fileHidden" formControlName="androidinput" />
+
+    </div>
+  </div>
+
+  <div class="customseperator"></div>
+
+  <div class="row">
+    <div class="col-sm-5 offset-1">
+      <label for="">
+        <strong>Webgl Assetsbundle</strong>
+      </label>
+      <br />
+
+      <div *ngIf="f.webglinput.value" style="font-size: 1rem;padding-bottom: 10px">{{f.webglinput.value}}</div>
+
+      <!-- </div> -->
+      <label class="btn thumb" (click)="editwebglfile.click()">Browse</label>
+      <input type="file" style="display: none;" ng2FileSelect [uploader]="uploaderweb" #editwebglfile/>
+
+      <label class="uploadfilename">{{uploaderweb.queue[uploaderweb.queue.length-1]?.file?.name}}</label>
+      <div *ngIf="uploaderweb.progress!==0">
+        <label class="labelbuild1">Webgl Build Upload </label>
+        <label class="labelbuild2 uploadfileprecentage"> {{uploaderweb.progress + '%'}}</label>
+        <label *ngIf="showwebsuccess" class="labelbuild2 completeupload">Successfully Uploaded!</label>
+      </div>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{ 'width': uploaderweb.progress + '%' }"></div>
+      </div>
+      <input type="hidden" name="fileHidden" formControlName="webglinput" />
+    </div>
+  </div>
+
+  <div class="customseperator"></div>
+
+  <div class="row">
+    <div class="col-sm-5 offset-1  ">
+      <mat-form-field class="example-full-width">
+        <mat-select name="categories" formControlName="categories" placeholder="Select Category"  [(ngModel)]="selectedcategory"
+          multiple>
+          <mat-option *ngFor="let topping of toppingList" [value]="topping._id">{{topping.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="col-sm-5 ">
+      <mat-form-field class="example-full-width">
+        <input type="number" formControlName="version" matInput placeholder="Version" value="{{version}}">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="customseperator"></div>
+  
+  <div class="row">
+    <div class="col-sm-5 offset-1">
+      <mat-form-field class="example-full-width">
+        <mat-select formControlName="searchtages" placeholder="Select Search Tag"  [(ngModel)]="selectedsearchtag" multiple>
+          <mat-option *ngFor="let searchtagtopping of searchtagtoppingList" [value]="searchtagtopping._id">{{searchtagtopping.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="customseperator"></div>
+
+  <div class="row">
+    <div *ngIf="!showpredefined" class="col-sm-5 offset-1">
+      <button type="button" (click)="changepredefined()" class="btn custom_predefined">Add Predfined</button>
+      <button class="buttongapcust btn_cstm_cmmn" type="submit" mat-raised-button color="accent">SUBMIT</button>
+      <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+      />
+    </div>
+  </div>
+  <div *ngIf="showpredefined">
+    <div formArrayName="itemRows">
+      <div *ngFor="let itemrow of itemRows.controls; let i=index" [formGroupName]="i">
+        <div class="row ">
+          <div class="col-sm-5 offset-1">
+
+            <label style="font-size: 20px;font-weight: 800"> Predfined Angles {{i+1}}</label>
+
+
+
+          </div>
+        </div>
+        <div class="row" style="float: right;margin-right: 20px">
+          <div class="col-sm-5 onset-1">
+            <button type="button" (click)="deleteRow(i)" class="btn custom_predefined">Delete Predfined</button>
+          </div>
+        </div>
+        <div class="customseperator"></div>
+        <div class="row ">
+          <div class="col-sm-5 offset-1 form-group">
+            <mat-form-field class="example-full-width">
+              <input formControlName="angleName" matInput placeholder="angleName" value="{{itemrow.controls.angleName.value}}">
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-5 form-group">
+            <mat-form-field class="example-full-width">
+              <input formControlName="angleversion" type="number" matInput placeholder="Angle Version" value="{{itemrow.controls.angleversion.value}}">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="customseperator"></div>
+        <div class="row ">
+          <div class="col-sm-5 offset-1 form-group">
+            <mat-form-field class="example-full-width">
+              <input formControlName="xRotation" matInput type="number" placeholder="xRotation" value="{{itemrow.controls.xRotation.value}}">
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-5 form-group">
+            <mat-form-field class="example-full-width">
+              <input formControlName="yRotation" matInput type="number" placeholder="yRotation" value="{{itemrow.controls.yRotation.value}}">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="customseperator"></div>
+        <div class="row ">
+          <div class="col-sm-5 offset-1 form-group">
+            <mat-form-field class="example-full-width">
+              <input formControlName="zRotation" matInput type="number" placeholder="zRotation" value="{{itemrow.controls.zRotation.value}}">
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-5 form-group">
+            <mat-form-field class="example-full-width">
+              <input formControlName="xPosition" matInput type="number" placeholder="xPosition" value="{{itemrow.controls.xPosition.value}}">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="customseperator"></div>
+        <div class="row ">
+          <div class="col-sm-5 offset-1 form-group">
+            <mat-form-field class="example-full-width">
+              <input formControlName="yPosition" matInput type="number" placeholder="yPosition" value="{{itemrow.controls.yPosition.value}}">
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-5 form-group">
+            <mat-form-field class="example-full-width">
+              <input formControlName="zPosition" matInput type="number" placeholder="zPosition" value="{{itemrow.controls.zPosition.value}}">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="customseperator"></div>
+        <div class="row ">
+          <div class="col-sm-5 offset-1 form-group">
+            <mat-form-field class="example-full-width">
+              <input formControlName="field_view" matInput type="number" placeholder="Field of View" value="{{itemrow.controls.field_view.value}}">
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-5 form-group">
+            <mat-form-field class="example-full-width">
+              <mat-select placeholder="Freeze Rotation" formControlName="freeze_rotation" value="{{itemrow.controls.freeze_rotation.value}}">
+                <mat-option *ngFor="let freeze of freeze_rotas" [value]="freeze.value">
+                  {{freeze.viewValue}}
+                </mat-option>
+              </mat-select>
+              <!-- <input formControlName="freeze_rotation" matInput placeholder="Freeze Rotation" value="{{itemrow.controls.freeze_rotation.value}}"> -->
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="customseperator"></div>
+        <div class="row ">
+          <div class="col-sm-10 offset-1 form-group">
+            <mat-form-field class="example-full-width">
+              <input formControlName="distance" matInput type="number" placeholder="Distance" value="{{itemrow.controls.distance.value}}">
+            </mat-form-field>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-5 offset-1">
+        <button type="button" (click)="addNewRow()" class="btn custom_predefined">Add Predfined</button>
+        <button class="buttongapcust btn_cstm_cmmn" type="submit" mat-raised-button color="accent">SUBMIT</button>
+        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+        />
+      </div>
+    </div>
+    <div class="customseperator"></div>
+  </div>
+  <div class="customseperator"></div>
+  <div class="row">
+    <div class="col-sm-10 offset-1">
+
+      <!-- <button mat-raised-button color="accent">Clear</button> -->
+    </div>
+  </div>
+
+</form>

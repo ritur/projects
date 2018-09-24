@@ -1,0 +1,9 @@
+var express = require('express');
+var router = express.Router();
+var user = require('./../schema/users');
+var Promise = require("bluebird");
+// var session = require('express-session');
+var crypto = require('crypto');
+var cors = require('cors');
+var jwt = require('jsonwebtoken');
+var creditpriceuser = require('./../schema/creditpriceuser');

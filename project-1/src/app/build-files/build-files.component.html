@@ -1,0 +1,93 @@
+<!-- <mat-spinner></mat-spinner> -->
+<app-admin-header></app-admin-header>
+<div class="row">
+  <div class="col-sm-10 offset-1">
+    <label class="buildlabel" for="">
+      <strong>Window Build File</strong>
+    </label>
+    <br />
+    <label class="btn thumb" (click)="filewindowbuild.click()">Browse</label>
+
+    <!-- <angular-file-uploader #fileUpload1 name="windowassest" [accept]="allowedMimeType.toString()" [config]="assetconfig" (ApiResponse)="DocUpload($event,'windowinput')">
+
+      </angular-file-uploader> -->
+    <input type="file" style="display: none;" ng2FileSelect [uploader]="uploaderwind" #filewindowbuild/>
+
+    <label class="uploadfilename">{{uploaderwind.queue[uploaderwind.queue.length-1]?.file?.name}}</label>
+
+    <div *ngIf="uploaderwind.progress!==0" class="text-center">
+      <label class="labelbuild1">Window Build Upload </label>
+      <label class="labelbuild2 uploadfilename"> {{uploaderwind.progress + '%'}}</label>
+      <label *ngIf="showwindowsuccess" class="labelbuild2 completeupload">Successfully Uploaded!</label>
+    </div>
+
+    <div class="progress">
+
+      <div class="progress-bar progress-bar-striped active" role="progressbar" [ngStyle]="{ 'width': uploaderwind.progress + '%' }"></div>
+    </div>
+    <div *ngIf="messagerrorwin" class="row">
+      <span class="errormessage" *ngIf="messagerrorwin">{{messagerrorwin}}</span>
+    </div>
+    <input type="hidden" name="fileHidden" />
+    <!-- <div *ngIf="submitted && f.windowinput.errors" style="color:red">
+      
+          <div *ngIf="f.windowinput.errors.required">Window Asset required</div>
+        
+      </div> -->
+    <div *ngIf="showwindowsuccess_btn||message_succ_win||message_fail_win" class="save_btn">
+      <button *ngIf="showwindowsuccess_btn" on-click="save_build('window')" class="btn thumb">Save WindowBuild</button>
+      <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+      />
+      <label *ngIf="message_succ_win" class="succes">Succefully Save</label>
+      <label *ngIf="message_fail_win" class="errors">Not saved</label>
+    </div>
+
+  </div>
+</div>
+<div class="customseperator"></div>
+<div class="customseperator"></div>
+<div class="row">
+  <div class="col-sm-10 offset-1">
+    <label class="buildlabel" for="">
+      <strong>MAC Build Files</strong>
+    </label>
+    <br />
+
+    <label class="btn thumb" (click)="filemacbuild.click()">Browse</label>
+
+    <!-- <angular-file-uploader #fileUpload2 name="macasset" [accept]="allowedMimeType.toString()" [config]="assetconfig" (ApiResponse)="DocUpload($event,'macinput')">
+
+      </angular-file-uploader> -->
+    <input type="file" style="display: none;" ng2FileSelect [uploader]="uploadermac" #filemacbuild/>
+    <!-- <div *ngFor="let item of uploadermac.queue">
+          <label>{{item?.file?.name}}</label>
+          </div> -->
+    <label class="uploadfilename">{{uploadermac.queue[uploadermac.queue.length-1]?.file?.name}}</label>
+    <div *ngIf="uploadermac.progress!==0" class="text-center">
+      <label class="labelbuild1">Mac Build Upload </label>
+      <label class="labelbuild2 uploadfilename"> {{uploadermac.progress + '%'}}</label>
+      <label *ngIf="showmacsuccess" class="labelbuild2 completeupload">Successfully Uploaded!</label>
+    </div>
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped active" role="progressbar" [ngStyle]="{ 'width': uploadermac.progress + '%' }"></div>
+    </div>
+    <div *ngIf="messagerrormac" class="row">
+      <span class="errormessage" *ngIf="messagerrormac">{{messagerrormac}}</span>
+    </div>
+    <input type="hidden" name="fileHidden" />
+    <div *ngIf="showmacsuccess_btn" class="save_btn">
+      <button *ngIf="showmacsuccess_btn||message_succ_mac||message_fail_mac" on-click="save_build('mac')" class="btn thumb">Save MAC Build</button>
+      <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+      />
+      <label *ngIf="message_succ_mac" class="succes">Succefully Save</label>
+      <label *ngIf="message_fail_mac" class="errors" >Not saved</label>
+    </div>
+    <!-- <div *ngIf="submitted && f.macinput.errors" style="color:red">
+      
+          <div *ngIf="f.macinput.errors.required">MAC Asset required</div>
+        
+      </div> -->
+
+  </div>
+</div>
+<div class="customseperator"></div>

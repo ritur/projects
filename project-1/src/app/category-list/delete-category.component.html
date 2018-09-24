@@ -1,0 +1,14 @@
+
+<h3 mat-dialog-title class="cstm_h1_cat">Delete Category</h3>
+<div mat-dialog-content>
+<p class="cstm_p_cat">Do you want to delete Category?</p>
+
+</div>
+<div mat-dialog-actions>
+<button mat-button class="cst_cancel_btn" (click)="onNoClick()">Cancel</button>
+
+<button mat-button class="cst_ok_btn" on-click="deleteassest(data.id)" cdkFocusInitial>Ok</button>
+<div class="row errormesg">
+    <span class="errormessageserver" *ngIf="errormessage">{{errormessage}}</span>
+</div>
+</div>
