@@ -1,0 +1,84 @@
+.top_sec h1 {
+    text-align: initial;
+    color: #fbb010;
+    margin-top: 18px;
+    font-weight: 600;
+}
+.top_sec {
+    text-align: center;
+}
+.btn_cstm_cmmn {
+    background-color: #ffb010!important;
+    border: 1px solid #ffb010 !important;
+    font-weight: 700;
+    font-size: 15px;
+}
+.top_sec h2 {
+    color: #33495d;
+    text-align: initial;
+    font-size: 21px;
+    font-weight: 500;
+}
+.top_sec span{
+    color: #33495d;
+}
+.user_info textarea {
+    height: 100px!important;
+}
+input#address {
+    height: 100px;
+}
+.form-control {
+    border-radius: 3px !important;
+}
+.form-group {
+    margin-bottom: 6px;
+}
+.user_info {
+    text-align: center;
+}
+::-webkit-input-placeholder {
+    color: #9ba4a2;
+    font-size: 26px;
+    font-weight: 400;
+}
+::-moz-placeholder {
+    color: #9ba4a2;
+    font-size: 26px;
+    font-weight: 400;
+}
+::-moz-placeholder {
+    color: #9ba4a2;
+    font-size: 26px;
+    font-weight: 400;
+}
+::-ms-input-placeholder {
+    color: #9ba4a2;
+    font-size: 26px;
+    font-weight: 400;
+}
+.orng_txt {
+    padding-bottom: 0px;
+    color: #ffb010;
+    font-size: 20px;
+    font-weight: 500;
+   
+}
+input[type="textarea"] {
+    height: 80px!important;
+}
+.email_msg {
+    padding-bottom: 50px;
+}
+.box_right
+{
+    height: 200px!important;
+}
+input.box_right {
+    height: 187px!important;
+    padding-bottom: 145px;
+}
+.bot_box1
+{
+    margin-left: -10px;
+}

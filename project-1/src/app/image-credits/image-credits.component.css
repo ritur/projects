@@ -1,0 +1,208 @@
+.spinner {
+    position: relative;
+    width: 100px;
+    margin-left: 3px;
+    }
+    .input-group-btn-vertical {
+    position: absolute;
+    top: -1px;
+    }
+    .spinner input {
+    width: 100%;
+    background-color: #ffffff;
+    text-align: start;
+    }
+    .spinner input {
+     font-size: 18px;
+     margin-top: 8px;
+     margin-left: 35px;
+    }
+    .input-group-btn-vertical {
+    position: relative;
+    white-space: nowrap;
+    width: 1%;
+    }
+    .input-group-btn-vertical > .btn {
+    padding: 9px 17px;
+    display: block;
+    float: none;
+    width: 100%;
+    max-width: 100%;
+    padding: 8px;
+    margin-left: 5px;
+    position: relative;
+    border-radius: 0;
+    }
+    .input-group-btn-vertical > .btn:first-child {
+    border: none;
+    position: relative;
+    border-bottom-right-radius: 0px;
+    position: relative;
+    background: transparent;
+    outline: none;
+    }
+    .input-group-btn-vertical > .btn:last-child {
+    border: 0px;
+    border-bottom-right-radius: 0px;
+    position: relative;
+    background: transparent;
+    outline: none;
+    }
+    .input-group-btn-vertical button:hover{
+        background: transparent!important;
+        outline: 0!important;
+        border: 0!important;
+    }
+    .input-group-btn-vertical button:active{
+        background: transparent!important;
+        outline: 0!important;
+        border: 0!important;
+        box-shadow: none;
+    }
+    .input-group-btn-vertical button:focus{
+        background: transparent!important;
+        outline: 0!important;
+        border: 0!important;
+        box-shadow: none;
+    }
+    i.fa.fa-caret-up {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    i.fa.fa-caret-down {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .input-group-btn-vertical i {
+    color:  #ffa300;
+    font-size: 22px;
+    text-shadow: 0px 0 #ffd700, 0 1px #ffd700, 0px 0#ffd700, 0 0px#ffd700;
+    }
+    .table thead th {
+    font-size: 19px;
+    color: #33495d;
+    font-weight: 500;
+    text-align: center;
+    padding: 2px;
+    }
+    .ctm_btn1
+    {
+        padding: 0px;
+        padding-left: 12px;
+        padding-right: 12px;
+        font-size: 17px;
+        color: #ffffff;
+        background-color:  #ffa300;
+        border-radius: 0px;
+        margin-left: -55%;
+        margin-top: 7px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        box-shadow: 0 1px 1px #ffd700;
+    }
+    input.form-control {
+        height: 21px;
+        max-width: 64px;
+        border-radius: 0px;
+        margin-left: 35px; 
+        font-size: 18px;
+        border: 1px solid #9fa1a0;
+        padding: 0px 10px;
+    }
+    .dollar_sign
+    {
+        color: #ffa300;
+        font-size: 21px;
+        margin-left: 28px;
+        margin-right: -27px;
+        margin-top: 1px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        text-shadow: 0px 0 #ffd700, 0 1px #ffd700, 0px 0#ffd700, 0 0px#ffd700;
+    }
+    .pro_info
+    {
+     text-transform: inherit;
+     color: #33495d!important;
+    }
+    .card-title
+    {
+        font-size: 18px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        border-bottom: 2px solid;
+        width: 16%;
+        text-shadow: 0px 0 #ffd700, 0 1px #ffd700, 0px 0#ffd700, 0 0px#ffd700;
+    }
+    .form-control:disabled, .form-control[readonly] {
+    background-color: transparent;
+    opacity: 1;
+    margin-top: 8px;
+}
+.table-responsive
+{
+ margin-top: 35px;
+}
+.price
+{
+ margin-left: -74px;
+}
+/* .input-group-btn-vertical[_ngcontent-c3] > .btn[_ngcontent-c3]:first-child {
+   
+       top: -58px;
+} */
+.span_42
+{
+    font-size: 46px;
+}
+.page-header h1
+{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size:30px;
+    margin-left: -14px;
+    margin-top: 15px;
+}
+.user_data_tab {
+    margin-top: -15px;
+    margin-left: -15px;
+}
+h5{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    margin-top: 5px;
+    font-size: 19px;
+}
+table.table.table-striped th{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    color:#33495d;
+    padding-left: 32px;
+}
+
+.labelerror{
+    font-family: 'Montserrat', sans-serif;
+    padding-left: 12px;
+    color: #ce0808;
+}
+.lodingclass{
+    width: 27px;
+    height: 27px;
+}
+.total_credits span
+{
+    text-shadow: 0px 0 #ffd700, 0 1px #ffd700, 0px 0#ffd700, 0 0px#ffd700;
+}
+input.form-control::-webkit-inner-spin-button {
+    margin: 0px;
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+    -moz-appearance: none !important;
+}
+.msg_warn
+{
+    margin-left: 15px;
+    margin-top: 7px;
+}

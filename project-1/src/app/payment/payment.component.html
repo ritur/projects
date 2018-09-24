@@ -1,0 +1,71 @@
+<section class="row">
+  <div class="col-sm-12">
+    <section class="row">
+      <div class="col-md-12">
+
+       <div class="card mb-4">
+          <div class="card-block user_data_tab">
+            <h1 class="card-title orange_color">Payment</h1>
+            <div class="seperater"></div>
+            <div class="row">
+
+              <div class="col-lg-1 col-sm-1">&nbsp;</div> 
+
+              <div class="col-lg-4 col-sm-4">
+                  <div class="card_inner_sec">
+                     <img src="assets/images/payment_card1.png" alt="credit card" />
+                  </div>
+              </div>
+
+              <div class="col-lg-4 col-sm-4">
+                  <div class="card_inner_sec">
+                      <img src="assets/images/addnew_card.png" alt="new card" />
+                   </div>
+              </div>
+
+            </div>
+          </div>
+          </div>
+          <div class="seperater"></div>
+        <div class="card mb-4">
+          <div class="card-block user_data_tab">
+            <h4 class="card-title"><span>PAYMENT LOG</span></h4>              
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Invoice No.</th>
+                    <th>Amount</th>
+                    <th>Email ID</th>
+                    <th>Invoice</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor = "let imgdata of imglogdata">
+                    <td>{{imgdata.date}}</td>
+                    <td>{{imgdata.invoice}}</td>
+                    <td>{{imgdata.amount}}</td>
+                    <td>{{imgdata.emailid}}</td>
+                    <td>{{imgdata.invoic}}</td>
+                  </tr>                
+                </tbody>
+              </table>
+            </div>
+
+            <div class="prev_next">
+                <div class="prev">
+                   <a href="#">Previous</a>
+                </div>
+                <div class="next">
+                    <a href="#">Next</a>
+                </div>
+              </div>
+              
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+</section>

@@ -1,0 +1,120 @@
+<app-header></app-header>
+<header class="page-header row">
+  <div class="col-md-6 col-lg-8">
+    <h1 class="float-left text-center text-md-left total_credits">
+      <span class="span_42">{{credit}}</span> Credits</h1>
+  </div>
+</header>
+<section class="row">
+  <div class="col-sm-12">
+    <section class="row">
+      <div class="col-md-12">
+
+        <div class="card mb-4">
+          <div class="card-block user_data_tab">
+            <h3 class="card-title orange_color">ADD CREDITS</h3>
+            <div class="row">
+              <label *ngIf="!is_active" class="labelerror">Cannot buy credit until user is not active</label>
+            </div>
+            <div class="row">
+
+
+              <div class="col-lg-4 col-sm-4">
+                <div class="input-group mb-3">
+                  <h5 class="pro_info">Quantity</h5>
+                  <div class="input-group spinner mb-3">
+                    <input type="text" class="form-control" style="-moz-appearance: textfield" pattern="/^[0-9]$/" name="amountcredit" on-keydown="handlechangeamt($event)"  on-keyup="handlechangeamt($event)" value="0"  name='amountofcredit' #amountofcredit>
+                    <div class="input-group-btn-vertical">
+                      <button class="btn btn-default" (click)="increasevalue(amountofcredit.value,$event)" type="button">
+                        <i class="fa fa-caret-up" ></i>
+                      </button>
+                      <button class="btn btn-default" (click)="deacreasevalue(amountofcredit.value,$event)" type="button">
+                        <i class="fa fa-caret-down" ></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4 col-sm-4">
+                <div class="input-group mb-3 price">
+                  <h5 class="pro_info">Price</h5>
+                  <div class="input-group-prepend">
+                    <span class="dollar_sign">$</span>
+                  </div>
+                  <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" value="{{amount}}" disabled>
+                </div>
+              </div>
+
+              <div class="col-lg-4 col-sm-4">
+                <!-- {{is_active}} -->
+
+                <div class="input-group mb-3" *ngIf="buyoption==0">
+
+                  <button type="button" [disabled]="!is_active" (click)="handlePayment(amountofcredit.value)" class=" btn btn-lg btn-warning ctm_btn1">Buy</button>
+                  <img *ngIf="loader" class="lodingclass" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                  />
+
+                  <label *ngIf="disableoption" class="msg_warn">{{msg}}</label>
+                  <label  *ngIf="message!='' " class="msg_warn">{{message}}</label>
+
+                </div>
+                <div class="input-group mb-3" *ngIf="buyoption==1">
+
+                  <button type="button" [disabled]="!is_active" (click)="payPayment(amountofcredit.value)"  class=" btn btn-lg btn-warning ctm_btn1">Buy</button>
+                  <img *ngIf="loader" class="lodingclass" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                  />
+                  <!-- <label *ngIf="!is_active">Cannot buy credit until user is not active</label> -->
+                  <label  *ngIf="disableoption" class="msg_warn">{{msg}}</label>
+                  <label  *ngIf="message!='' " class="msg_warn">{{message}}</label>
+                </div>
+
+                <div class="input-group mb-3" *ngIf="buyoption==2">
+
+                  <button type="button" [disabled]="!is_active" class=" btn btn-lg btn-warning ctm_btn1">Buy</button>
+                  <img *ngIf="loader" class="lodingclass" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                  />
+                  <!-- <label *ngIf="!is_active">Cannot buy credit until user is not active</label> -->
+                  <label *ngIf="disableoption" class="msg_warn">{{msg}}</label>
+                  <label  *ngIf="message!='' " class="msg_warn">{{message}}</label>
+                </div>
+                <!-- <div class="msg_paye">Payement Succeful</div> -->
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-block user_data_tab">
+            <h3 class="card-title">IMAGE LOG</h3>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>DATE</th>
+                    <th>TIME</th>
+                    <th class="title_ryt">USER</th>
+                    <th class="title_ryt">CREDIT USED</th>
+                    <th>REMAINING CREDIT</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let imgdata of imglogdata">
+                    <td>{{imgdata.date}}</td>
+                    <td>{{imgdata.time}}</td>
+                    <td>{{imgdata.users}}</td>
+                    <td>{{imgdata.credit}}</td>
+                    <td>{{imgdata.remaining}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+  </div>
+</section>

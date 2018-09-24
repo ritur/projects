@@ -1,0 +1,223 @@
+<app-header></app-header>
+<div class="row gap_btn">
+    <div class="col-12">
+        <a *ngIf="isDisabled==false" on-click="disableClick()" class=" btn_cstm_edit">EDIT</a>
+    </div>
+</div>
+
+<!-- Four Unequal Columns -->
+
+<div class="seperater"></div>
+<form [formGroup]="editprofile" (ngSubmit)="onFormSubmit(editprofile.value)">
+    <div class="container-fluid">
+        <div class="row" id="first_row">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <!-- <div class="hexagon"><div class="circle"></div></div> -->
+                <div class="profile_image">
+                    <div class="profile_user" *ngIf="profile_image!==null">
+                        <img *ngIf="profile_image!==null" src="{{profile_image}}" (click)="fileimage.click();" alt="Responsive image" id="avater_main">
+
+                        <input type="file" name="image_pro" accept="image/png,image/jpg,image/jpeg" (change)=" changeshowlogo();" style="display: none;"
+                            ng2FileSelect [uploader]="uploadimage" #fileimage>
+                        <i class="fa fa-camera camera" aria-hidden="true" (click)="fileimage.click()">
+                            <h5 class="user_title">change Profile
+                                <br>Picture</h5>
+                        </i>
+                        <mat-spinner *ngIf="loading"></mat-spinner>
+                        <div *ngIf="!uploadimage.progress==0 &&  showlogo" class="progress">
+
+                            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploadimage.progress + '%' }">{{uploadimage.progress + '%'}}</div>
+                        </div>
+
+                    </div>
+
+                    <div class="profile_user" *ngIf="profile_image===null">
+
+                        <img *ngIf="profile_image===null" src="assets/images/user-profile.png" (click)="fileimage.click();" alt="Responsive image"
+                            id="avater_main">
+                        <input type="file" name="image_pro" accept="image/png,image/jpg,image/jpeg" style="display: none;" (change)=" changeshowlogo();"
+                            ng2FileSelect [uploader]="uploadimage" #fileimage>
+                        <i class="fa fa-camera camera" aria-hidden="true" (click)="fileimage.click()">
+                            <h5 class="user_title">change Profile
+                                <br>Picture</h5>
+                        </i>
+                        <mat-spinner *ngIf="loading"></mat-spinner>
+                        <div *ngIf="!uploadimage.progress==0 && showlogo" class="progress">
+
+                            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploadimage.progress + '%' }">{{uploadimage.progress + '%'}}</div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                <div class="divpassword">
+                    <label (click)="openDialog()" class="btn_cstm_password px-4 text-center">CHANGE PASSWORD</label>
+                </div>
+
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 user_info">
+                <div class="form_title">
+                </div>
+                <div class="form-group row" *ngIf="isDisabled==false">
+                    <div class="col-sm-6 ">
+                        <input type="text" class="form-control" disabled value="{{firstName}}" style="text-transform: capitalize;"  placeholder="First name">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" disabled value="{{lastName}}" id="lastName" style="text-transform: capitalize;" placeholder="Last name">
+                    </div>
+                </div>
+                <div class="form-group row class-padding" *ngIf="isDisabled==true">
+                    <div class="col-sm-6 class-padding">
+
+
+                        <input type="text" class="form-control" [ngClass]="{ 'is-invalid': f.firstName.errors||error_firstname }"
+                            formControlName="firstName" value="{{firstName}}" (keyup)="valuefirst()"  style="text-transform: capitalize;" placeholder="First name">
+                        <div *ngIf="submitform && f.firstName.errors" class="invalid-feedback">
+                            <div *ngIf="f.firstName.errors.required">First name required</div>
+                           
+                        </div>
+                       <div  *ngIf="submitform &&error_firstname" class="invalid_name"><div>First name invalid</div></div> 
+                    </div>
+
+                    <div class="col-sm-6 class-padding">
+
+                        <input type="text" class="form-control"  [ngClass]="{ 'is-invalid': f.lastName.errors||error_lastname }"
+                            formControlName="lastName" value="{{lastName}}" (keyup)="valuelast()" id="lastName"  style="text-transform: capitalize;"
+                            placeholder="Last name">
+                        <div *ngIf="submitform && f.lastName.errors" class="invalid-feedback">
+                            <div *ngIf="f.lastName.errors.required">Last name required</div>
+                            
+
+                        </div>
+                        <div *ngIf="submitform &&error_lastname" class="invalid_name"><div >Last name invalid</div></div>
+                    </div>
+                </div>
+
+                <div class="form-group row" *ngIf="isDisabled==true">
+                    <div class="col-sm-4">
+
+                        <input type="text" class="form-control" value={{mobileNo}} id="mobileNo" [ngClass]="{ 'is-invalid': f.mobileNo.errors }"
+                            formControlName="mobileNo" placeholder="Mobile Number" pattern="^[0-9+-]{0,16}$" />
+                        <div *ngIf="f.mobileNo.errors" class="invalid-feedback">
+                            <div ng-message="pattern">Must be a valid phone number</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+
+                        <input type="text" class="form-control" value={{street}} id="street" placeholder="Street" formControlName="street" [ngClass]="{ 'is-invalid': f.street.errors }">
+
+                    </div>
+                    <div class="col-sm-4">
+
+                        <input type="text" class="form-control" value={{pincode}} id="pincode" placeholder="Pincode" formControlName="pincode" [ngClass]="{ 'is-invalid': f.pincode.errors }">
+
+                    </div>
+                </div>
+                <div class="form-group row" *ngIf="isDisabled==false">
+                    <div class="col-sm-4">
+
+                        <input type="text" class="form-control" disabled value={{mobileNo}} id="mobileNo" placeholder="Mobile Number">
+
+                    </div>
+                    <div class="col-sm-4">
+
+                        <input type="text" class="form-control" disabled value={{street}} id="street" placeholder="Street">
+
+                    </div>
+                    <div class="col-sm-4">
+
+                        <input type="text" class="form-control" disabled value={{pincode}} id="pincode" placeholder="Pincode">
+
+                    </div>
+                </div>
+
+
+                <div class="form-group row" *ngIf="isDisabled==false">
+                    <div class="col-sm-12">
+
+                        <input type="text" disabled class="form-control" value={{address}} id="address" placeholder="Address">
+
+                    </div>
+
+                </div>
+                <div class="form-group row" *ngIf="isDisabled==true">
+                    <div class="col-sm-12">
+
+                        <input type="text" class="form-control" value={{address}} id="address" [ngClass]="{ 'is-invalid': f.address.errors }" formControlName="address"
+                            placeholder="Address">
+
+                    </div>
+
+                </div>
+                <div class="form-group row" *ngIf="isDisabled==true">
+                    <div class="col-sm-4">
+                        <select class="form-control" value="{{country}}" (change)="countryChange(court.value)" placeholder="Country" #court>
+                            <option value="">Select Country</option>
+                            <option *ngFor="let c of countries" value="{{c.id}}">{{ c.name }}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <select class="form-control" value="{{state}}" (change)="statesChange(stataa.value)" placeholder="State" #stataa>
+                            <option value="">Select state</option>
+                            <option *ngFor='let statei of states' value="{{statei.id}}">{{ statei.name }}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <select class="form-control" value="{{city}}" placeholder="City" (change)="citychange(cutt.value)" #cutt>
+                            <option value="">Select city</option>
+                            <option *ngFor='let cityi of cities' value="{{cityi.id}}">{{ cityi.name }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row" *ngIf="isDisabled==false">
+                    <div class="col-sm-4">
+
+                        <input type="text" class="form-control" value={{countryinputvalue}} disabled id="country" placeholder="country">
+
+                    </div>
+
+                    <div class="col-sm-4">
+
+                        <input type="text" class="form-control" value={{stateinputvalue}} disabled id="state" placeholder="State">
+
+                    </div>
+                    <div class="col-sm-4">
+
+                        <input type="text" class="form-control" value={{cityinputvalue}} disabled id="city" placeholder="City">
+
+                    </div>
+                </div>
+
+                <!-- <div class="form-group row class-padding" *ngIf="isDisabled==true">
+                    <div class="col-sm-6  ">
+
+                        <input type="password" matInput formControlName="password" [ngClass]="{ 'is-invalid':submitform && f.password.errors }" class="form-control"
+                            id="password" placeholder="Password">
+                        <div *ngIf="submitform && f.password.errors" class="invalid-feedback">
+                            <div *ngIf="f.password.errors.required">Password is required</div>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6  class-padding">
+
+                        <input type="password" matInput class="form-control" [ngClass]="{ 'is-invalid': submitform &&f.cnfpassword.errors }" id="cnfpassword"
+                            formControlName="cnfpassword" placeholder="Confirm Password">
+                        <div *ngIf="submitform && f.cnfpassword.errors" class="invalid-feedback">
+                            <div *ngIf="f.cnfpassword.errors.required">Password mismatch</div>
+
+                        </div>
+                    </div>
+                </div> -->
+                <button *ngIf="isDisabled==true" type="button" type="submit" class="btn btn-primary btn_cstm_cmmn px-4 text-center">Save</button>
+                <img *ngIf="loadingedit" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                />
+
+
+            </div>
+
+        </div>
+    </div>
+</form>

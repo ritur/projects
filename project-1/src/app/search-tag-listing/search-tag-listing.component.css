@@ -1,0 +1,28 @@
+.mat-column-select {
+    overflow: initial;
+  }
+  table {
+    width: 100%;
+  }
+  .example-container {
+    height: 400px;
+    overflow: auto;
+  }
+  table th{
+    text-align: center;
+  }
+  table td{
+    text-align: center;
+  }
+.mat-header-cell {
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    color: rgba(0,0,0,.87);
+}
+.mat-cell, .mat-footer-cell
+{
+    color: rgba(0,0,0,.54);
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+}

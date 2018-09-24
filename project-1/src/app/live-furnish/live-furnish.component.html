@@ -1,0 +1,13 @@
+<div class="container-fluid greybg" id="wrapper">
+  <div class="row h100">
+  <nav  class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
+   <app-left-sidebar></app-left-sidebar>
+  </nav>
+  <main class="col-xs-12 col-sm-8 col-lg-9 col-xl-10 pt-3 pl-4 ml-auto">
+      <p *ngIf="message">{{messagedata}}
+      <a on-click="click_link()" style="cursor: pointer;border-bottom: 1px solid #ff0000;">click here</a></p>
+      <span *ngIf="messagesuccess">An email has been sent for activation of your account</span>
+   <router-outlet></router-outlet>
+  </main>
+  </div>
+</div>

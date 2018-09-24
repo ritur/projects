@@ -1,0 +1,13 @@
+.sidebar-nav a {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 17px;     
+     }
+     /* .site-title img {
+        border-bottom: 2px solid;
+        border-bottom-color: #fff;
+    }
+  */  
+  .site-title img{
+      width:87%;
+  }  

@@ -1,0 +1,11 @@
+.mat-progress-spinner {
+/* width: 300px!important;
+height: 300px!important; */
+left: 45%;
+top: 215px;
+}
+
+mat-spinner.mat-progress-spinner.mat-primary svg {
+    width: 300px!important;
+    height: 300px!important;
+}
